@@ -1,4 +1,4 @@
-# [Sponsorname] Audit
+# Basin Audit
 
 Audit findings are submitted to this repo.
 
