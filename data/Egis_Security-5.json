@@ -1,0 +1,8 @@
+{
+  "contest": 430,
+  "handle": "Egis_Security",
+  "risk": "2",
+  "title": "Stable2::calcLpTokenSupply() - The function cannot convert under certain circumstances, DoSing `calcReserveAtRatioLiquidity`",
+  "issueId": 5,
+  "issueUrl": "https://github.com/code-423n4/2024-08-basin-findings/issues/5"
+}
