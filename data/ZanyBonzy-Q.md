@@ -120,47 +120,7 @@ https://github.com/code-423n4/2024-08-basin/blob/7e08ff591df0a2ade7d5618113dda26
 
 ***
 
-### 5. Converging solution formula described in function helper is not same as implementation.
-
-Links to affected code *
-
-#### Impact
-
-In helper string [here](https://github.com/code-423n4/2024-08-basin/blob/7e08ff591df0a2ade7d5618113dda2621cd899bc/src/functions/Stable2.sol#L73), converging solution is described as following.
-```
-D[j+1] = (4 * A * sum(b_i) - (D[j] ** 3) / (4 * prod(b_i))) / (4 * A - 1)       [1]
-``` 
-Invariant condition is as following:
-$$An^n\sum x_i + D = DAn^n+D^{(n+1)}/(n^n\prod x_i)$$
-```
-A * sum(x_i) * n**n + D = A * D * n**n + D**(n+1) / (n**n * prod(x_i))
-```
-
-@Brean shared an article how someone derived D[j+1] from above invariant condition [here](https://atulagarwal.dev/posts/curveamm/stableswap/).
-$$D_{(n+1)}=D_n-f(D_n)/f'(D_n)=(AnnS+nD_p)D_n/((Ann-1)D_n+(n+1)D_p)$$
-where $$S=\sum x_i$$,  $$Ann=An^n$$,       $$D_p=D^{(n+1)}/(n^n \prod x_i)$$
-
-As $$N=2$$, above equation can be simplified as following:
-```
-D[j+1]=(4*A*sum(b_i)+2*D_p)*D[j] / ( (4 * A - 1)*D[j] + (2+1)*D_p )       [2]
-```  
-Implementation [here](https://github.com/code-423n4/2024-08-basin/blob/7e08ff591df0a2ade7d5618113dda2621cd899bc/src/functions/Stable2.sol#L94) is not same as [1], but same to [2]. 
-
-#### Recommended Mitigation Steps
-
-```diff
-     * @notice Calculate the amount of lp tokens given reserves.
-     * D invariant calculation in non-overflowing integer operations iteratively
-     * A * sum(x_i) * n**n + D = A * D * n**n + D**(n+1) / (n**n * prod(x_i))
-     *
-     * Converging solution:
--    * D[j+1] = (4 * A * sum(b_i) - (D[j] ** 3) / (4 * prod(b_i))) / (4 * A - 1)
-+    * D[j+1]=(4*A*sum(b_i)+2*D_p)*D[j] / ( (4 * A - 1)*D[j] + (2+1)*D_p )
-```
-
-***
-
-### 6. `Implementation` is spelt `Implmentation`
+### 5. `Implementation` is spelt `Implmentation`
 
 Links to affected code *
 
@@ -205,4 +165,20 @@ Other instances are in comments and error messages.
 
 Update the spelling.
 ***
+
+6. Grammatcial error in comment
+
+Links to affected code *
+
+https://github.com/code-423n4/2024-08-basin/blob/7e08ff591df0a2ade7d5618113dda2621cd899bc/src/WellUpgradeable.sol#L19-L21
+
+#### Impact
+
+... "through a minimal proxy."
+
+```solidity
+    /**
+     * @notice Verifies that the execution is called through an minimal proxy. 
+     */
+```
 
